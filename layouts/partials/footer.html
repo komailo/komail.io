@@ -1,0 +1,31 @@
+<footer class="footer">
+  <section class="container">
+    {{ if (getenv "CF_PAGES") }}
+    <a
+      href='https://github.com/Komailio/hugo-komail.io/tree/{{ getenv "CF_PAGES_COMMIT_SHA" }}'
+      target="_blank"
+      rel="noopener"
+      >Source on GitHub</a
+    >
+    |
+    <a href="https://pages.cloudflare.com" target="_blank" rel="noopener"
+      >Powered by Cloudflare Pages</a
+    >
+    {{ end }}
+  </section>
+  {{ if (ne hugo.Environment "production") }}
+  <section class="container">Environment: {{ hugo.Environment }}</section>
+  {{ end }}
+  <section class="container">
+    © {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }} {{
+    .Site.Params.since }} - {{ end }} {{ now.Year }} {{ with .Site.Params.author
+    }} {{ . }} {{ end }} {{ if (and .Site.Params.license) }} {{ i18n
+    "licensed_under" }} {{ .Site.Params.license | safeHTML }} · {{ end }} {{ if
+    (and .Site.Params.commit .GitInfo) }} [<a
+      href="{{ .Site.Params.commit }}/{{ .GitInfo.Hash }}"
+      target="_blank"
+      rel="noopener"
+      >{{ .GitInfo.AbbreviatedHash }}</a
+    >] {{ end }}
+  </section>
+</footer>

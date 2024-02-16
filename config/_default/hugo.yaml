@@ -1,0 +1,47 @@
+defaultcontentlanguage: "en"
+languageCode: "en-us"
+paginate: 20
+theme: "coder"
+title: "Komail.io"
+
+markup:
+  highlight:
+    style: "github-dark"
+
+params:
+  author: "Komail Kanjee"
+  info: ""
+  description: ""
+  keywords: "blog,developer,personal"
+  gravatar: "kanjee@komail.ca"
+
+  faviconSVG: "/img/favicon.svg"
+  favicon_32: "/img/favicon-32x32.png"
+  favicon_16: "/img/favicon-16x16.png"
+
+  since: 2020
+
+  enableTwemoji: true
+
+  colorScheme: "auto"
+  hidecolorschemetoggle: false
+
+  # customCSS: ["css/custom.css"]
+  # customSCSS: ["scss/custom.scss"]
+  # customJS: ["js/custom.js"]
+
+  social:
+    - name: "Github"
+      icon: "fa-brands fa-github fa-2x"
+      weight: 1
+      url: "https://github.com/komailio"
+    - name: "LinkedIn"
+      icon: "fa-brands fa-linkedin fa-2x"
+      weight: 1
+      url: "https://www.linkedin.com/in/kkanjee/"
+
+taxonomies:
+  category: "categories"
+  series: "series"
+  tag: "tags"
+  author: "authors"

@@ -1,0 +1,6 @@
+# we source themes from other repos
+/themes
+
+/node_modules
+/resources/_gen
+/public
