@@ -1,0 +1,6 @@
+---
+funcs:
+  getenv:
+    - ^HUGO_
+    - ^CF_PAGES$
+    - ^CF_PAGES_
