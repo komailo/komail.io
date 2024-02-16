@@ -2,7 +2,7 @@
   <section class="container1">
     {{ if (getenv "CF_PAGES") }}
     <a
-      href="https://github.com/Komailio/hugo-komail.io/tree/{{ getenv CF_PAGES_COMMIT_SHA}}"
+      href="https://github.com/Komailio/hugo-komail.io/tree/{{ getenv 'CF_PAGES_COMMIT_SHA' }}"
       target="_blank"
       rel="noopener"
       >Source on GitHub</a
