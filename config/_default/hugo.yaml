@@ -1,5 +1,4 @@
 defaultcontentlanguage: "en"
-enableGitInfo: true
 languageCode: "en-us"
 paginate: 20
 theme: "coder"
@@ -28,7 +27,6 @@ params:
   info: ""
   description: ""
   keywords: "blog,developer,personal"
-  avatarurl: "images/avatar.jpg"
   gravatar: "kanjee@komail.ca"
 
   faviconSVG: "/img/favicon.svg"
@@ -41,8 +39,6 @@ params:
 
   colorScheme: "auto"
   hidecolorschemetoggle: false
-
-  hideCredits: true
 
   # customCSS: ["css/custom.css"]
   # customSCSS: ["scss/custom.scss"]
