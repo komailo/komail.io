@@ -1,14 +1,28 @@
 defaultcontentlanguage: "en"
 enableGitInfo: true
-languageCode: 'en-us'
+languageCode: "en-us"
 paginate: 20
 theme: "coder"
-title: 'Komailio'
+title: "Komail.io"
 
 markup:
   highlight:
     style: "github-dark"
 
+menu:
+  main:
+    - name: "About"
+      url: "/about/"
+      weight: 1
+    - name: "Blog"
+      url: "/blog/"
+      weight: 2
+    - name: "Projects"
+      url: "/projects/"
+      weight: 3
+    - name: "Contact me"
+      url: "/contact-me/"
+      weight: 4
 params:
   author: "Komail Kanjee"
   info: ""
@@ -28,7 +42,7 @@ params:
   colorScheme: "auto"
   hidecolorschemetoggle: false
 
-  hideCredits: true 
+  hideCredits: true
 
   # customCSS: ["css/custom.css"]
   # customSCSS: ["scss/custom.scss"]
