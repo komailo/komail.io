@@ -45,3 +45,9 @@ taxonomies:
   series: "series"
   tag: "tags"
   author: "authors"
+
+menu:
+  main:
+    - name: "Posts"
+      weight: 2
+      url: "posts/"
