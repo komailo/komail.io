@@ -1,17 +1,22 @@
-+++
-draft = false
-date = 2024-02-16T14:15:12-07:00
-title = "How To Create Your Own Website Like This One with Hugo and Cloudflare Pages"
-description = "A post walking through the process of how to create your own website like this one using Hugo and Cloudflare Pages."
-slug = ""
-authors = ["Komail Kanjee"]
-tags = ["hugo", "cloudflare", "cloudflare-pages"]
-categories = ["How To"]
-externalLink = ""
-series = ["How To"]
-+++
-
-# How to Create Your Own Website Like This One with Hugo and Cloudflare Pages
+---
+draft: false
+date: 2024-02-16T14:15:12-07:00
+title: "Getting Started with Hugo and Cloudflare Pages"
+description: "A post walking through the process of how to create your own website like this one using Hugo and Cloudflare Pages."
+slug: ""
+authors:
+  - Komail Kanjee
+tags:
+  - cloudflare
+  - cloudflare-pages
+  - hugo
+categories:
+  - How To
+  - Blogging
+externalLink: ""
+series:
+  - Building Websites with Hugo
+---
 
 If you're looking to create your own website similar to this one, but you're not keen on managing a complex infrastructure, you're in luck! In this guide, I'll walk you through the process of setting up a website using Hugo, a static site generator, and hosting it on Cloudflare Pages, a simple and efficient platform for deploying static sites.
 
