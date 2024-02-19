@@ -17,7 +17,7 @@
   <section class="container">Environment: {{ hugo.Environment }}</section>
   {{ end }}
   <section class="container">
-    Published with ♥ by {{ with .Site.Params.author }} {{ . }} {{ end }} 
+    Published with ♥ by {{ with .Site.Params.author }} {{ . }} {{ end }}
     © {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }} {{
     .Site.Params.since }} - {{ end }} {{ now.Year }} {{ with .Site.Params.author
     }} {{ . }}. {{ end }} All Rights Reserved.
