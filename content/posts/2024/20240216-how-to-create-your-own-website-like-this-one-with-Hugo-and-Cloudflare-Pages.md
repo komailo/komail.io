@@ -34,7 +34,7 @@ Before we begin, make sure you have the following:
 
 ## Setting up the Git Repository
 
-To get started, create a new GitHub repository using the template provided by [Komailio/template-hugo-coder](https://github.com/Komailio/template-hugo-coder). The template includes instructions on setting up the repository and using it with Hugo.
+To get started, create a new GitHub repository using the template provided by [Komailo/template-hugo-coder](https://github.com/Komailio/template-hugo-coder). The template includes instructions on setting up the repository and using it with Hugo.
 
 ## Getting a Domain Name
 
@@ -45,6 +45,6 @@ While not mandatory, I recommend securing a domain name for your website. You ca
 Now, let's deploy your website on Cloudflare Pages using Terraform:
 
 1. **Sign Up/Login to Cloudflare**: If you don't have a Cloudflare account yet, sign up on their website. If you're already a user, log in to your account.
-2. **Setup Cloudflare Pages via Terraform**: Utilize the Terraform module provided by [terraform-modules-cloudflare-pages-hugo](https://github.com/Komailio/terraform-modules-cloudflare-pages-hugo) to automate the setup process. This module streamlines the configuration of Cloudflare Pages, making deployment a breeze.
+2. **Setup Cloudflare Pages via Terraform**: Utilize the Terraform module provided by [terraform-modules-cloudflare-pages-hugo](https://github.com/Komailo/terraform-modules-cloudflare-pages-hugo) to automate the setup process. This module streamlines the configuration of Cloudflare Pages, making deployment a breeze.
 
 With these steps completed, you'll have your own website up and running, powered by Hugo and hosted on Cloudflare Pages. Feel free to customize the design, add content, and share your creations with the world!

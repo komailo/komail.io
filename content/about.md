@@ -14,7 +14,6 @@ katex: ""
 keywords: ""
 lastmod: ""
 math: ""
-publishDate: ""
 series: []
 slug: ""
 tags: []
