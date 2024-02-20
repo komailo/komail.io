@@ -1,6 +1,6 @@
 ---
 authors:
-    - Komail Kanjee
+  - Komail Kanjee
 canonicalUrl: ""
 categories: []
 date: Feb 19, 2024
@@ -31,6 +31,7 @@ In the professional realm, I've traversed diverse roles-from Test Automation and
 :goggles: :lab_coat: I manage my own home lab, housing numerous services customized to suit my personal requirements. I approach them with the same meticulousness as any production-grade service, albeit with a budget-conscious mindset. After all, there's little sense in fretting over high availability when the home has no power! While I've compiled internal documentation and configurations within my private repositories and internal wiki, I'm excited to begin sharing insights from my home lab on this platform. For a glimpse into my home lab's status and services, feel free to visit my [Status Page](https://status.digimach.com).
 
 ## The Genesis of This Blog :bulb:
+
 Ever been bombarded with questions from friends and colleagues about your wizardry? Well, that's been my reality! Often, I found myself hoarding guides and docs in my own internal wiki, accessible only through layers of authentication. But let's face it, subjecting my pals to an identity verification marathon seemed a tad excessive. Hence, the birth of this blog—a virtual treasure trove of my musings and know-how, ripe for the sharing! :books: :brain: :compass:
 
 Moreover, the realization struck that if I didn't have a guide for a particular feat, I'd whip one up and scatter it across platforms like Google Docs—only to promptly forget about its existence! :shrug:
