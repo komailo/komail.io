@@ -59,6 +59,6 @@ menu:
       url: "posts/"
 
 outputFormats:
-    RSS:
-        mediaType: "application/rss+xml"
-        baseName: "feed"
+  RSS:
+    mediaType: "application/rss+xml"
+    baseName: "feed"
