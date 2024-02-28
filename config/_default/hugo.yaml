@@ -1,6 +1,6 @@
 defaultcontentlanguage: "en"
 enableEmoji: true
-enableGitInfo: true
+enableGitInfo: false
 enableRobotsTXT: true
 languageCode: "en-us"
 paginate: 20
@@ -57,3 +57,8 @@ menu:
     - name: "Posts"
       weight: 2
       url: "posts/"
+
+outputFormats:
+    RSS:
+        mediaType: "application/rss+xml"
+        baseName: "feed"
