@@ -33,16 +33,11 @@
   </section>
   <section class="container">
     Published with ♥ by {{ with .Site.Params.author }} {{ . }} {{ end }}
-    © {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }} {{
-    .Site.Params.since }} - {{ end }} {{ now.Year }} {{ with .Site.Params.author
-    }} {{ . }}. {{ end }} All Rights Reserved.
-    {{ if (and .Site.Params.commit .GitInfo) }}
-    [<a
-      href="{{ .Site.Params.commit }}/{{ .GitInfo.Hash }}"
-      target="_blank"
-      rel="noopener"
-      >{{ .GitInfo.AbbreviatedHash }}</a
-    >] {{ end }}
+  </section>
+  {{ $url := absURL "" }}
+  {{ $u := urls.Parse $url }}
+  <section class="container">© {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }} {{
+    .Site.Params.since }} - {{ end }} {{ now.Year }} {{ $u.Hostname   }}. All Rights Reserved.
   </section>
   {{ if (ne hugo.Environment "production") }}
   <section class="container">Environment: {{ hugo.Environment }}</section>
