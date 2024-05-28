@@ -82,7 +82,7 @@ One of my managers inspired me to start this, and I credit him for introducing m
 
 **What do you need from your peers (outside the team)?**
 
-> A group of professionals who can help each other grow horizontally (technical skills) and vertically (people skills).
+> A group of professionals who can help each other grow horizontally (technical skills) and vertically (business skills).
 
 ### The Wordy Question
 
@@ -90,11 +90,11 @@ One of my managers inspired me to start this, and I credit him for introducing m
 
 > **Low ego:** I like to take on menial tasks as it allows me to learn and improve processes.
 >
-> **Space to reflect and brainstorm:** I enjoy daily focus time to read new content related to my work and think about problems that need consideration.
+> **Space to reflect and brainstorm:** I enjoy daily focus time to read new content related to my work and think about problems that need consideration. This varies on a weekly basises for me.
 >
-> **New challenges:** I stay engaged by seeking new challenges. I notice a lack of engagement when I'm not challenged and use this time to find new ways to satisfy my appetite for challenges.
+> **New challenges:** I stay engaged by seeking new challenges. I notice a lack of engagement on my part when I'm not challenged which is when I try and find new ways to satisfy my appetite for challenges.
 >
-> **Timely and clear feedback:** I appreciate clear and timely feedback, which my wonderful peers have provided.
+> **Timely and clear feedback:** I appreciate clear and timely feedback, which my wonderful peers in the past and present have provided.
 
 ### The Most Important Question
 
