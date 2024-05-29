@@ -4,7 +4,7 @@ authors:
 canonicalUrl: ""
 categories:
   - professional-development
-date: May 27, 2024
+date: 2024-05-27T21:08:11-05:00
 description: ""
 disableComments: ""
 draft: false
@@ -17,7 +17,7 @@ lastmod: ""
 math: ""
 publishDate: ""
 series:
-  - professional-development
+  - Professional Development
 slug: ""
 tags: []
 title: "First One-on-One"
