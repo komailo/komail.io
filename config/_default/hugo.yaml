@@ -44,10 +44,8 @@ params:
       url: "https://www.linkedin.com/in/kkanjee/"
 
 taxonomies:
-  category: "categories"
   series: "series"
   tag: "tags"
-  author: "authors"
 
 menu:
   main:
