@@ -1,0 +1,23 @@
+{{ if .Params.series }} {{ $page := . }} {{ range .Params.series }} {{
+$series_name := . }} {{ $series_name_anchored := $series_name | anchorize }} {{
+$series := index $page.Site.Taxonomies.series $series_name_anchored }} {{ if gt
+(len $series) 1 }}
+<section>
+  <style>
+    .banner {
+      background-color: #e2f1f5;
+      padding: 5px;
+      margin-bottom: 5px;
+      border-radius: 20px;
+      padding-left: 25px;
+    }
+  </style>
+  <div class="banner">
+    This post is part of the
+    <a href="{{ $page.Site.BaseURL }}/series/{{$series_name_anchored | urlize}}"
+      >{{$series_name}}</a
+    >
+    series.
+  </div>
+</section>
+{{ end }} {{ end }} {{ end }}
