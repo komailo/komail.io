@@ -1,0 +1,54 @@
+{{- if .Params.series -}}
+  {{- $series_name := index .Params.series 0 -}}
+  {{- $.Scratch.Set "cur_page_num" 0 -}}
+  {{- $.Scratch.Set "total_page_num" 0 -}}
+
+  {{- range .Site.RegularPages.ByDate -}}
+    {{- if in .Params.series $series_name -}}
+      {{- $.Scratch.Add "total_page_num" 1 -}}
+      {{- if gt $.Date.Unix .Date.Unix -}}
+        {{- $.Scratch.Add "cur_page_num" 1 -}}
+        {{- $.Scratch.Set "prev_link" .Permalink -}}
+        {{- $.Scratch.Set "prev_title" .Title -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $.Scratch.Add "cur_page_num" 1 -}}
+
+  {{- range .Site.RegularPages.ByDate.Reverse -}}
+    {{- if in .Params.series $series_name -}}
+      {{- $.Scratch.Set "first_link" .Permalink -}}
+      {{- if lt $.Date.Unix .Date.Unix -}}
+        {{- $.Scratch.Set "next_link" .Permalink -}}
+        {{- $.Scratch.Set "next_title" .Title -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if or ($.Scratch.Get "next_link") ($.Scratch.Get "prev_link") -}}
+    <section>
+      <div class="banner">
+        <div style="text-align: center;">
+          Part {{ $.Scratch.Get "cur_page_num" }} of {{ $.Scratch.Get "total_page_num" }}
+          in the <b><a href="{{ $.Site.BaseURL }}/series/{{ $series_name | anchorize | urlize }}">{{ $series_name }}</a></b> series.
+        </div>
+        <div style="text-align: center;">
+          {{- if ne ($.Scratch.Get "cur_page_num") 1 -}}
+            <a href="{{ $.Scratch.Get "first_link" }}"><i class="fa fa-fast-backward"></i> Series Start</a>
+          {{- end -}}
+
+          {{- if $.Scratch.Get "prev_link" -}}
+            {{- if ne ($.Scratch.Get "cur_page_num") 1 -}} &nbsp;|&nbsp; {{- end -}}
+            <a href="{{ $.Scratch.Get "prev_link" }}"><i class="fa fa-chevron-left"></i> {{ $.Scratch.Get "prev_title" }}</a>
+          {{- end -}}
+
+          {{- if $.Scratch.Get "next_link" -}}
+            {{- if $.Scratch.Get "prev_link" -}} &nbsp;|&nbsp; {{- end -}}
+            <a href="{{ $.Scratch.Get "next_link" }}">{{ $.Scratch.Get "next_title" }} <i class="fa fa-chevron-right"></i></a>
+          {{- end -}}
+        </div>
+      </div>
+    </section>
+  {{- end -}}
+{{- end -}}
