@@ -4,8 +4,6 @@ date: 2024-02-16T14:15:12-07:00
 title: "Getting Started with Hugo and Cloudflare Pages"
 description: "A post walking through the process of how to create your own website like this one using Hugo and Cloudflare Pages."
 slug: ""
-authors:
-  - Komail Kanjee
 tags:
   - cloudflare
   - cloudflare-pages

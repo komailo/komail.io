@@ -1,22 +1,61 @@
 <footer class="footer">
   {{ if not .IsHome }}
   <div class="about">
-  {{ with .Site.Params.social }}
-  <ul>
-    {{ range sort . "weight" }}
-      {{ if .icon }}
-          <a href="{{ .url | safeURL }}" aria-label="{{ .name }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} {{ if .target }}target="{{ .target }}"{{ end }} {{ if .type }}type="{{ .type }}"{{ end }}>
-            <i class="{{ .icon }}" aria-hidden="true"></i>
-          </a>
+    {{ with .Site.Params.social }}
+    <ul>
+      {{ range sort . "weight" }} {{ if .icon }}
+      <a
+        href="{{ .url | safeURL }}"
+        aria-label="{{ .name }}"
+        {{
+        if
+        .rel
+        }}rel="{{ .rel }}"
+        {{
+        end
+        }}
+        {{
+        if
+        .target
+        }}target="{{ .target }}"
+        {{
+        end
+        }}
+        {{
+        if
+        .type
+        }}type="{{ .type }}"
+        {{
+        end
+        }}
+      >
+        <i class="{{ .icon }}" aria-hidden="true"></i>
+      </a>
       {{ else }}
-          <a href="{{ .url | safeURL }}" aria-label="{{ .name }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} {{ if .target }}target="{{ .target }}"{{ end }}>{{ .name }}</a>
-      {{ end }}
+      <a
+        href="{{ .url | safeURL }}"
+        aria-label="{{ .name }}"
+        {{
+        if
+        .rel
+        }}rel="{{ .rel }}"
+        {{
+        end
+        }}
+        {{
+        if
+        .target
+        }}target="{{ .target }}"
+        {{
+        end
+        }}
+        >{{ .name }}</a
+      >
+      {{ end }} {{ end }}
+    </ul>
     {{ end }}
-  </ul>
-  {{ end }}
   </div>
   {{ end }}
-  </section>
   <section class="container">
     {{ if (getenv "CF_PAGES") }}
     <a
@@ -34,10 +73,11 @@
   <section class="container">
     Published with ♥ by {{ with .Site.Params.author }} {{ . }} {{ end }}
   </section>
-  {{ $url := absURL "" }}
-  {{ $u := urls.Parse $url }}
-  <section class="container">© {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }} {{
-    .Site.Params.since }} - {{ end }} {{ now.Year }} {{ $u.Hostname   }}. All Rights Reserved.
+  {{ $url := absURL "" }} {{ $u := urls.Parse $url }}
+  <section class="container">
+    © {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }} {{
+    .Site.Params.since }} - {{ end }} {{ now.Year }} {{ $u.Hostname }}. All
+    Rights Reserved.
   </section>
   {{ if (ne hugo.Environment "production") }}
   <section class="container">Environment: {{ hugo.Environment }}</section>
