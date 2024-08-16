@@ -1,8 +1,8 @@
 ---
 draft: false
 date: 2024-08-13T20:34:11-05:00
-title: "Getting start with K3s"
-description: "A post about getting setup up a lightweight K3s Kubernetes cluster on a local machine"
+title: "Getting started with K3s"
+description: "A post about getting started with a lightweight K3s Kubernetes cluster on a local machine"
 slug: ""
 tags:
   - homelab
