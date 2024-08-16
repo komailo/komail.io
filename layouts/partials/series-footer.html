@@ -37,12 +37,12 @@
           {{- if ne ($.Scratch.Get "cur_page_num") 1 -}}
             <a href="{{ $.Scratch.Get "first_link" }}"><i class="fa fa-fast-backward"></i> Series Start</a>
           {{- end -}}
-          
+
           {{- if $.Scratch.Get "prev_link" -}}
             {{- if ne ($.Scratch.Get "cur_page_num") 1 -}} &nbsp;|&nbsp; {{- end -}}
             <a href="{{ $.Scratch.Get "prev_link" }}"><i class="fa fa-chevron-left"></i> {{ $.Scratch.Get "prev_title" }}</a>
           {{- end -}}
-          
+
           {{- if $.Scratch.Get "next_link" -}}
             {{- if $.Scratch.Get "prev_link" -}} &nbsp;|&nbsp; {{- end -}}
             <a href="{{ $.Scratch.Get "next_link" }}">{{ $.Scratch.Get "next_title" }} <i class="fa fa-chevron-right"></i></a>
