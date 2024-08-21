@@ -77,7 +77,7 @@ The configuration file for K3s resides in `/etc/rancher/k3s/config.yaml`. Starti
 Key configurations include:
 
 - The kube config file is generated in `/etc/rancher/k3s/k3s.yaml`, which contains secrets needed to interact with the cluster. It’s advisable to secure this file.
-- The `cluster-cidr` and `service-cidr` settings are customized to avoid conflicts with the default 10.0.0.0/8 address block.
+- The `cluster-cidr` and `service-cidr` settings are customized to avoid conflicts with the current 10.0.0.0/8 address block being used in my environment.
 - The `cluster-dns` IP is set to a static address, as I will be configuring a custom CoreDNS instance. For this reason, the default K3s CoreDNS is disabled.
 - Load balancing will be managed by MetalLB, which we will set up later. Thus, the default servicelb is disabled.
 - To conserve compute resources, the metrics server is disabled, as it’s not needed for this setup.
@@ -301,11 +301,46 @@ First, add the CoreDNS Helm repository to your Helm installation. This repositor
 helm repo add coredns https://coredns.github.io/helm
 ```
 
+**Setting up ConfigMap with External TLD**
+In this step, we configure a `ConfigMap` to enable CoreDNS to resolve domain names for services that should be accessible externally. This allows you to handle DNS-based service discovery for services outside of the Kubernetes cluster.
+
+First, place the following `ConfigMap` in the `/var/lib/rancher/k3s/server/manifests/coredns-config-map-k8s-external.yaml` file. This `ConfigMap` defines the external domain that CoreDNS should resolve. Once the file is placed, K3s will auto apply it.
+
+Replace `example.com` with the domain name that you plan to use for your external services.
+
+```yaml
+# /var/lib/rancher/k3s/server/manifests/coredns-config-map-k8s-external.yaml
+coredns-config-map-k8s-external.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-k8s-external
+  namespace: kube-system
+data:
+  coredns-k8s-external.conf: |
+    example.com:53 {
+      kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+        ttl 30
+      }
+      k8s_external
+    }
+```
+
 **Installing the CoreDNS Helm Chart**
-Now, install the CoreDNS Helm chart in the kube-system namespace, ensuring that the service IP is set to the static IP `172.17.17.17`:
+Now that the `ConfigMap` is ready, install CoreDNS using Helm to manage DNS within your Kubernetes cluster. We will configure the service IP to `172.17.17.17` for internal DNS resolution and expose CoreDNS externally via a LoadBalancer with the IP `10.1.2.200` from the `host-lan-reserved` range.
 
 ```sh
-helm --namespace=kube-system install coredns coredns/coredns --set service.clusterIP=172.17.17.17
+helm  --namespace=kube-system install coredns coredns/coredns \
+      --set service.clusterIP=172.17.17.17 \
+      --set serviceType=LoadBalancer \
+      --set service.loadBalancerIP=10.1.2.200 \
+      --set extraConfig.import.parameters="/opt/coredns/*.conf" \
+      --set extraVolumes[0].name=coredns-k8s-external \
+      --set extraVolumes[0].configMap.name=coredns-k8s-external \
+      --set extraVolumeMounts[0].name=coredns-k8s-external \
+      --set extraVolumeMounts[0].mountPath=/opt/coredns
 ```
 
 Once the Helm installation is complete, it will provide some commands to verify the deployment. Before verifying, wait for the CoreDNS pods to be ready. You can monitor the readiness of the pods by using the following command:
@@ -328,99 +363,28 @@ $ kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools
 kubernetes.default.svc.cluster.local has address 172.17.0.1
 ```
 
-### Configuring CoreDNS for External Resolution
+**Verifying Service DNS Resolution**
+After setting up CoreDNS, verify that it resolves both internal and external DNS queries correctly.
 
-In this configuration, CoreDNS will provide external DNS resolution, allowing devices outside your Kubernetes cluster to resolve the IP addresses of services running inside the cluster. By exposing CoreDNS externally, we enable DNS resolution of services on the cluster from any machine within the local network.
-
-To expose CoreDNS externally, we will create a LoadBalancer service using MetalLB. This will assign a stable IP from the `host-lan-reserved` range, which external machines in your local network can use as their DNS server.
-
-**Configuring External DNS Resolution**
-The following manifest configures CoreDNS to resolve external queries for a specific domain. Adjust the domain to match your environment. If you do not have a custom domain, you can use a .local domain, but keep in mind that .local domains may not be ideal for all network setups.
-
-The `loadBalancerIP` is chosen from the `host-lan-reserved` range configured for MetalLB. Ensure this IP does not overlap with other services in your network.
-
-After adjusting the manifest below, copy it to `/var/lib/rancher/k3s/server/manifests/core-dns-config.yaml`. The manifest will be automatically applied.
-
-```yaml
-# /var/lib/rancher/k3s/server/manifests/core-dns-config.yaml
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: coredns-custom
-  namespace: kube-system
-data:
-  K8s_external.server: |
-    homelabK8s.example.com:53 {
-        kubernetes
-        K8s_external homelabK8s.example.com
-    }
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ext-dns-udp
-  namespace: kube-system
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "DNS"
-spec:
-  type: LoadBalancer
-  loadBalancerIP: 10.1.2.200
-  ports:
-    - port: 53
-      targetPort: 53
-      protocol: UDP
-  selector:
-    K8s-app: coredns
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ext-dns-tcp
-  namespace: kube-system
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "DNS"
-spec:
-  type: LoadBalancer
-  loadBalancerIP: 10.1.2.200
-  ports:
-    - port: 53
-      targetPort: 53
-      protocol: TCP
-  selector:
-    K8s-app: coredns
-```
-
-**Verifying External DNS Resolution**
-After applying the above manifest, CoreDNS will be configured for external DNS resolution. External machines in your network can now resolve Kubernetes service IPs by querying the CoreDNS service IP.
-
-Verify the service is created and assigned the valid IP by running the following command:
+To check internal DNS resolution, run the following from another machine or the same node:
 
 ```sh
-kubectl get svc --namespace kube-system
+dig +short @10.1.2.200 coredns.kube-system.svc.cluster.local
 ```
 
-The example output below shows the External IP assigned as configured in the manifest.
+For external DNS resolution:
 
 ```sh
-$ kubectl get svc --namespace kube-system
-NAME          TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
-coredns       ClusterIP      172.17.17.17    <none>        53/UDP,53/TCP   3m23s
-ext-dns-tcp   LoadBalancer   172.17.56.149   10.1.2.200    53:30278/TCP    2m22s
-ext-dns-udp   LoadBalancer   172.17.89.5     10.1.2.200    53:31425/UDP    2m21s
+dig +short @10.1.2.200 coredns.kube-system.example.com
 ```
 
-To test the setup, configure an external machine to use `10.1.2.200` as its DNS server. You should then be able to resolve service domains like `kubernetes.default.svc.cluster.local` by running the following command:
+Expected output:
 
 ```sh
-dig +short @10.1.2.200 kubernetes.default.svc.cluster.local
-```
-
-In the example output we can see the service IP
-
-```sh
-$ dig +short @10.1.2.200 kubernetes.default.svc.cluster.local
-172.17.0.1
+$ dig +short @10.1.2.200 coredns.kube-system.svc.cluster.local
+172.17.17.17
+$ dig +short @10.1.2.200 coredns.kube-system.example.com
+10.1.2.200
 ```
 
 ## Conclusion
