@@ -1,5 +1,14 @@
 <footer class="footer">
-  {{ if not .IsHome }}
+  {{ if and (not .IsHome) (ne hugo.Environment "development") }}
+  <div class="container">
+    <i class="fa fa-history" aria-hidden="true"></i>
+    <a
+      href='https://github.com/komailo/komail.io/commits/{{ getenv "CF_PAGES_COMMIT_SHA"}}/content/{{ .File.Path }}'
+      target="_blank"
+      rel="noopener"
+      >History</a
+    >
+  </div>
   <div class="about">
     {{ with .Site.Params.social }}
     <ul>
