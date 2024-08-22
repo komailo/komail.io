@@ -1,0 +1,18 @@
+frontmatter:
+  date:
+    - date
+    - publishdate
+    - pubdate
+    - published
+    - lastmod
+    - modified
+  expiryDate:
+    - expirydate
+    - unpublishdate
+  lastmod:
+    - :git
+  publishDate:
+    - publishdate
+    - pubdate
+    - published
+    - date

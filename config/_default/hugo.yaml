@@ -1,6 +1,6 @@
 defaultcontentlanguage: "en"
 enableEmoji: true
-enableGitInfo: false
+enableGitInfo: true
 enableRobotsTXT: true
 languageCode: "en-us"
 paginate: 20
