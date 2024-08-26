@@ -72,22 +72,7 @@ These steps were verified on Ubuntu 22.04 but should work on any Linux distribut
 
 ### Setting up K3s Server
 
-The configuration file for K3s resides in `/etc/rancher/k3s/config.yaml`. Starting with a basic configuration to get the cluster up and running. For more details about the configuration file and its syntax, you can refer to the official [K3s Configuration Documentation](https://docs.k3s.io/installation/configuration#configuration-file).
-
-Key configurations include:
-
-- The kube config file is generated in `/etc/rancher/k3s/k3s.yaml`, which contains secrets needed to interact with the cluster. It’s advisable to secure this file.
-- The `cluster-cidr` and `service-cidr` settings are customized to avoid conflicts with the current 10.0.0.0/8 address block being used in my environment.
-- The `cluster-dns` IP is set to a static address, as I will be configuring a custom CoreDNS instance. For this reason, the default K3s CoreDNS is disabled.
-- Load balancing will be managed by MetalLB, which we will set up later. Thus, the default servicelb is disabled.
-- To conserve compute resources, the metrics server is disabled, as it’s not needed for this setup.
-- An ingress controller like Traefik can be installed later if required, but it’s disabled for now.
-- Since this guide focuses on a homelab or single-node Kubernetes setup, the cloud controller is also disabled.
-- Finally, as the intent is to use ArgoCD for application management, the Helm controller is disabled for now
-
-Refer to [K3s Package Components](https://docs.k3s.io/installation/packaged-components#packaged-components) to learn more about the addons that K3s comes with.
-
-As part of my local network address allocation, I use 172.16.0.0/12 for locally unroutable addresses and 10.0.0.0/8 for locally routable addresses.
+The configuration file for K3s resides in `/etc/rancher/k3s/config.yaml`. For more details about the configuration file and its syntax, you can refer to the official [K3s Configuration Documentation](https://docs.k3s.io/installation/configuration#configuration-file).
 
 Start by creating the directory for the configuration file:
 
@@ -95,7 +80,7 @@ Start by creating the directory for the configuration file:
 mkdir -p /etc/rancher/k3s/
 ```
 
-Now, create the configuration file `/etc/rancher/k3s/config.yaml` with the following content:
+Now, create the configuration file `/etc/rancher/k3s/config.yaml` with the following content. The settings are explained below.
 
 ```yaml
 # /etc/rancher/k3s/config.yaml
@@ -113,6 +98,19 @@ disable:
 disable-cloud-controller: true
 disable-helm-controller: true
 ```
+
+Key configurations include:
+
+- The kube config file is generated in `/etc/rancher/k3s/k3s.yaml`, which contains secrets needed to interact with the cluster. It’s advisable to secure this file.
+- The `cluster-cidr` and `service-cidr` settings are customized to avoid conflicts with the current 10.0.0.0/8 address block being used in my environment.
+- The `cluster-dns` IP is set to a static address, as I will be configuring a custom CoreDNS instance. For this reason, the default K3s CoreDNS is disabled. Refer to [K3s Package Components](https://docs.k3s.io/installation/packaged-components#packaged-components) to learn more about the addons that K3s comes with.
+- Load balancing will be managed by MetalLB, which we will set up later. Thus, the default servicelb is disabled.
+- To conserve compute resources, the metrics server is disabled, as it’s not needed for this setup.
+- An ingress controller like Traefik can be installed later if required, but it’s disabled for now.
+- Since this guide focuses on a homelab or single-node Kubernetes setup, the cloud controller is also disabled.
+- Finally, as the intent is to use ArgoCD for application management, the Helm controller is disabled for now
+
+As part of my local network address allocation, I use 172.16.0.0/12 for locally unroutable addresses and 10.0.0.0/8 for locally routable addresses.
 
 To install the K3s binaries and set it up as a system service, run the following command:
 
