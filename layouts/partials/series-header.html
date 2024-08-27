@@ -4,15 +4,24 @@ $series := index $page.Site.Taxonomies.series $series_name_anchored }} {{ if gt
 (len $series) 1 }}
 <section>
   <style>
-    .banner {
+    body.colorscheme-light .series-banner {
       background-color: #e2f1f5;
       padding: 5px;
       margin-bottom: 5px;
       border-radius: 20px;
       padding-left: 25px;
     }
+
+    body.colorscheme-dark .series-banner {
+      background-color: #2d3c80;
+      padding: 5px;
+      margin-bottom: 5px;
+      border-radius: 20px;
+      padding-left: 25px;
+    }
   </style>
-  <div class="banner">
+
+  <div class="series-banner">
     This post is part of the
     <a href="{{ $page.Site.BaseURL }}/series/{{$series_name_anchored | urlize}}"
       >{{$series_name}}</a

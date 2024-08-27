@@ -28,7 +28,7 @@
 
   {{- if or ($.Scratch.Get "next_link") ($.Scratch.Get "prev_link") -}}
     <section>
-      <div class="banner">
+      <div class="series-banner">
         <div style="text-align: center;">
           Part {{ $.Scratch.Get "cur_page_num" }} of {{ $.Scratch.Get "total_page_num" }}
           in the <b><a href="{{ $.Site.BaseURL }}/series/{{ $series_name | anchorize | urlize }}">{{ $series_name }}</a></b> series.
