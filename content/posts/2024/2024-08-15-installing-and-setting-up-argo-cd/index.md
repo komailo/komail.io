@@ -41,7 +41,7 @@ You will need a repository to store the manifests that ArgoCD will manage. For t
 
 You can either fork this repository or clone it to use as a base. Once forked or cloned, push it to your own private or public repository.
 
-Recommendation: If you decide to fork the repository or use your own repository, remember to update the repository URL in any manifest files you use later, especially in the `values.yaml` and `application-bootstrap.yaml` file, to point to your own repository.
+**Recommendation:** If you decide to fork the repository or use your own repository, remember to update the repository URL in any manifest files you use later, especially in the `values.yaml` and `application-bootstrap.yaml` file, to point to your own repository.
 
 ## Installing ArgoCD via Helm
 
@@ -155,7 +155,7 @@ Before you can log in to the ArgoCD UI or CLI, you need the default admin passwo
 Command to Retrieve Admin Password:
 
 ```sh
-echo "Admin password: $(kubectl ---namespace argocd get secret argocd-initial-admin-secret --output jsonpath='{.data.password}' | base64 --decode)"
+echo "Admin password: $(kubectl get secret argocd-initial-admin-secret --namespace argocd --output jsonpath='{.data.password}' | base64 --decode)"
 ```
 
 Once you have the IP address, head to the ArgoCD UI via the browser and login with username admin and the password you retrieved above.
@@ -163,7 +163,9 @@ Once you have the IP address, head to the ArgoCD UI via the browser and login wi
 After logging in, you should see the ArgoCD dashboard displaying any pre-configured applications from the example repository (if you used one).
 These applications, such as Kubernetes Dashboard or NGINX, will already be set up in the ArgoCD UI for monitoring and management.
 
-![Image argocd-applications-first-login](./images/argocd-applications-first-login.png)
+{{< figure link="./images/argocd-applications-first-login.png" src="./images/argocd-applications-first-login.png" caption="ArgoCD Applications" >}}
+
+If you see something different in your ArgoCD UI, its possible I have improved on the example manifest repository. I will try and keep the above screenshot up to date.
 
 **Tip:** Make sure to explore the UI to familiarize yourself with its features, such as application synchronization, rollback options, and monitoring capabilities.
 
