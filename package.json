@@ -3,6 +3,6 @@
     "prettier": "3.2.5"
   },
   "dependencies": {
-    "hugo-bin": "^0.119.0"
+    "hugo-bin": "^0.137.0"
   }
 }
